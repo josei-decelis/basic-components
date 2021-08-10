@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <!--font awesome-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <style>
+        .widget-carrito {
+            box-sizing: border-box;
+            border-radius: 8px;
+            background-color: #FFFFFF;
+            font-family: Roboto;
+            width: 272px;
+            padding: 24px 24px;
+            position: fixed;
+            z-index: 900;
+            right: 60px;
+            top: 200px;
+            box-shadow: 0 1px 4px 0 rgba(14, 21, 32, 0.18);
+        }
+
+        .widget-carrito .producto {
+            position: relative;
+            border-bottom: solid 1px #d8e5eb;
+            margin-bottom: 26px;
+
+        }
+
+        .widget-carrito-off {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+            height: 284px;
+            right: 60px;
+            top: 200px;
+        }
+
+        .widget-carrito-off p {
+            color: #767F9D;
+            font-size: 18px;
+            margin: 77px 24px 71px 24px;
+            letter-spacing: -0.76px;
+            line-height: 22px;
+            text-align: center;
+        }
+
+        .widget-carrito .carrito-titulo {
+            font-size: 18px;
+            line-height: 1;
+            letter-spacing: -0.76px;
+            color: #202830;
+            margin-bottom: 27px;
+            margin-top: 27px
+        }
+
+        .widget-carrito .titulo-producto {
+
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.31;
+            letter-spacing: -0.67px;
+            color: #202830;
+            margin-bottom: 14px;
+        }
+
+        .widget-carrito .titulo-producto>p {
+            display: inline;
+        }
+
+        .widget-carrito label {
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.75;
+            letter-spacing: -0.5px;
+            color: #202830;
+        }
+
+        .widget-carrito input[type="text"] {
+            border: none;
+            font-size: 12px;
+            line-height: 1.17;
+            letter-spacing: -0.5px;
+            color: #737f87;
+            text-align: right;
+            width: 100px;
+        }
+
+        .widget-carrito .btn-activo {
+            width: 100%;
+            height: 48px;
+            margin: 28px 0 23px 0;
+            padding: 12px 0;
+            border-radius: 4px;
+            border: 1px solid #D5006C;
+            background-color: #D5006C;
+            color: #FFFFFF;
+            font-family: Roboto;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.31px;
+            line-height: 21px;
+            padding: 9px;
+        }
+
+        .widget-carrito .btn-inactivo {
+            width: 100%;
+            color: #BFC5D2;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: -0.31px;
+            line-height: 21px;
+            text-align: center;
+            margin-bottom: 31px;
+            border-radius: 4px;
+            border: none;
+            background-color: #F5F7FA;
+            padding: 10px 0;
+        }
+
+        .widget-carrito select {
+            min-width: 78px;
+            height: 32px;
+            padding: 0 7px 0 7px;
+            border-radius: 4px;
+            border: solid 1px #bfc5d2;
+            background-color: #ffffff;
+            color: #737F87
+        }
+
+        .widget-carrito button {
+            border: none;
+            background-color: #FFFFFF;
+            margin-top: 12px;
+            margin-bottom: 18px;
+        }
+
+        .widget-carrito .rotate {
+            -moz-transition: all .2s linear;
+            -webkit-transition: all .2s linear;
+            transition: all .2s linear;
+        }
+
+        .widget-carrito .rotate.down {
+            -moz-transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        .widget-carrito .fa {
+            color: #BFC5D2;
+            cursor: pointer;
+        }
+
+        /* Inicio tooltip */
+        .widget-carrito .carrito-tooltip {
+            display: none;
+            height: 158px;
+            width: 254px;
+        }
+
+        .widget-carrito .icon-informacion:hover+.carrito-tooltip {
+            box-sizing: border-box;
+            display: block;
+            padding: 5px 11px 26px 18px;
+            width: 254px;
+            border-radius: 4px;
+            box-shadow: 0 1px 4px 0 rgba(14, 21, 32, 0.18);
+        }
+
+        .widget-carrito .carrito-tooltip {
+            position: absolute;
+            top: 35px;
+            left: -130px;
+            background-color: #F5F7FA;
+            box-shadow: 0 1px 4px 0 rgba(14, 21, 32, 0.18);
+        }
+
+        .widget-carrito .carrito-tooltip::before {
+            content: ' ';
+            display: block;
+            width: 30px;
+            height: 30px;
+            border-radius: 2px 0 0 0;
+            transform: rotate(45deg);
+            top: -13px;
+            left: 165px;
+            position: relative;
+            background-color: #F5F7FA;
+            border-right: none;
+            border-bottom: none;
+            /*  box-shadow: 0 1px 4px 0 rgba(14, 21, 32, 0.18); */
+            ;
+        }
+
+        .widget-carrito .tooltip-info {
+            font-weight: normal;
+            color: #202830;
+            font-family: Roboto;
+            font-size: 14px;
+            letter-spacing: -0.59px;
+            line-height: 18px;
+        }
+
+        .widget-carrito .tooltip-titulo {
+            height: 24px;
+            width: 225px;
+            color: #202830;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: -0.59px;
+            line-height: 14px;
+        }
+
+        /* Fin Tooltip */
+        .widget-carrito .icon-menu-up {
+            background: url("icon/menu-up.svg") no-repeat;
+            width: 24px;
+            height: 24px;
+        }
+
+        .widget-carrito .icon-informacion {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url("icon/information.svg") no-repeat;
+        }
+
+        .widget-carrito .icon-eliminar {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: url("icon/trash.svg") no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="widget-carrito widget-carrito-off" style="display: none;">
+        <form action="">
+            <p>Aún no has solicitado un producto</p>
+            <input class="btn-inactivo" type="button" value="Solicitar">
+        </form>
+    </div>
+    <div class="widget-carrito">
+        <form action="">
+            <p class="carrito-titulo">Estás solicitando 2 productos</p>
+            <!-- Inicio POS fijo -->
+            <div class="producto">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="titulo-producto">
+                        <p>POS Fijo</p>
+                        <i class="icon-informacion"></i>
+                        <div class="carrito-tooltip">
+                            <p class="tooltip-titulo">Tu tarifa estimada sería de: </p>
+                            <p class="tooltip-info">Arriendo mensual desde 0,54 UF + IVA,($ 15.639 aproximado), más
+                                comisión por
+                                venta
+                            </p>
+                        </div>
+                    </div>
+                    <i class="icon-menu-up rotate" data-toggle="collapse" data-target="#pos-fijo"></i>
+                </div>
+                <div id="pos-fijo" class="collapse">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <label for="tipo-venta">Tipo de venta:</label>
+                        <input type="text" name="tipo-venta" readonly value="Presencial">
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <label for="cantidad">Cantidad:</label>
+                        <select name="cantidad">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-row-reverse">
+                        <button><i class="icon-eliminar"></i></button>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin POS fijo -->
+            <input class="btn-activo" type="button" value="Solicitar">
+        </form>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(".rotate").click(function () {
+            $(this).toggleClass("down");
+        })
+    </script>
+</body>
+
+</html>
